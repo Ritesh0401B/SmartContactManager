@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8" />
+<title>Login page</title>
+</head>
+<body>
+
+
+	<section>
+
+
+		<div class="container mt-5">
+			<div class="row">
+
+				<div class="col-md-6 offset-md-3">
+
+
+
+					<div class="my-card mt-1">
+
+						<!-- <img class="d-block mx-auto" style="width: 80px" src=""
+							th:src="@{/image/login_icon.png}" alt="" />
+							 -->
+
+
+						<!--  email form -->
+
+						<!-- <div class="alert alert-success" role="alert">We have sent
+							otp to your email...</div> -->
+
+						<!-- message box -->
+
+						<div class="container">
+
+							<div th:if="${session.message}"
+								th:classappend="${session.message.type}"
+								class="alert text-center" role="alert">
+								<p class="text-center" th:text="${session.message.content}"></p>
+							</div>
+
+						</div>
+
+
+
+						<form action="" th:action="@{/change-password}" method="post">
+
+							<div class="form-group mb-3">
+
+								<input name="email" required="required" type="text" th:value="${email}"
+									placeholder="" class="form-control" />
+
+							</div>
+
+
+							<div class="form-group mb-3">
+
+								<input name="otp" required="required" type="text"
+									placeholder="Otp here" class="form-control" />
+
+							</div>
+
+							<div class="container text-center mb-3">
+
+								<button class="btn btn-warning">Verify</button>
+
+							</div>
+
+						</form>
+
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</section>
+
+</body>
+</html>

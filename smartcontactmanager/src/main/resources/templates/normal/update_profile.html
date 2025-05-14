@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{normal/base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+
+
+	<section>
+
+		<div class="card ms-3 me-3 mb-2">
+
+			<div class="card-body">
+
+				<h1 class="text-center">Update Your Profile</h1>
+
+				<div class="container-fluid mt-1">
+
+					<div class="row">
+
+						<div class="col-md-10 offset-md-1">
+
+							<form action="#" th:object="${user}"
+								enctype="multipart/form-data" method="post"
+								th:action="@{/user/process-update-profile}" class="mt-2">
+
+
+								<input type="hidden" th:value="${user.id}" name="id" />
+
+								<!-- first name -->
+
+								<div class="input-group my-3">
+
+									<div class="input-group-text mx-2">
+
+										<i class="fa fa-user-alt"></i>
+
+									</div>
+
+									<input type="text" id="firstName" name="name"
+										placeholder="Enter name here" class="form-control"
+										th:value="${user.name}"
+										th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}" />
+
+									<div th:each="e : ${#fields.errors('name')}" th:text="${e}"
+										id="validationServer03Feedback" class="invalid-feedback ms-2"></div>
+
+								</div>
+
+
+								<!-- Email field -->
+
+								<div class="input-group mb-3">
+
+									<div class="input-group-text mx-2">
+
+										@
+										<!-- <i class="fa-regular fa-envelope"></i> -->
+
+									</div>
+
+									<input type="email" id="email" name="email"
+										th:value="${user.email}" placeholder="Enter email here"
+										class="form-control"
+										th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}" />
+
+									<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+										id="validationServer03Feedback" class="invalid-feedback"></div>
+
+								</div>
+
+
+									<!-- About field -->
+
+								<div class="input-group mb-4 mx-2">
+
+									<!-- <div class="input-group-text mx-2">
+
+										<i class="fa-solid fa-quote-left"></i>
+
+									</div> -->
+
+									<textarea id="mytextarea" name="about"
+										th:text="${user.about}"
+										placeholder="Enter contact description" class="form-control"
+										rows="10"></textarea>
+
+								</div>
+
+
+								<!-- user image -->
+
+
+								<div class="container text-center">
+
+									<img style="width: 200px; height: 200px;"
+										class="img-fluid my_profile_picture" src=""
+										th:src="@{'/image/' + ${user.imageUrl}}" alt="" />
+
+								</div>
+
+								<p class="text-secondary ms-2">Choose new profile pic</p>
+
+								<div class="custom-file mb-3 mx-2">
+
+									<input type="file" name="userImage" />
+
+								</div>
+
+								<!-- Buttons -->
+
+								<div class="container text-center">
+
+									<button class="btn btn-outline-primary">Save Contact</button>
+
+								</div>
+
+
+
+							</form>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</section>
+
+</body>
+</html>

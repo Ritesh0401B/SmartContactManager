@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8" />
+<title>Login page</title>
+</head>
+<body>
+
+
+	<section>
+
+
+		<div class="container mt-5">
+			<div class="row">
+
+				<div class="col-md-6 offset-md-3">
+
+
+
+					<div class="my-card mt-1">
+
+						<!-- <img class="d-block mx-auto" style="width: 80px" src=""
+							th:src="@{/image/login_icon.png}" alt="" />
+							 -->
+
+
+						<div class="container">
+
+							<div th:if="${session.message}"
+								th:classappend="${session.message.type}"
+								class="alert text-center" role="alert">
+								<p class="text-center" th:text="${session.message.content}"></p>
+							</div>
+
+						</div>
+
+						<!--  email form -->
+
+						<h3 class="text-center m-3">Your Registered Email</h3>
+
+						<form action="" th:action="@{/verify-otp}" method="post">
+
+							<div class="form-group mb-3">
+
+								<input name="email" required="required" type="email"
+									placeholder="Enter email here" class="form-control" />
+
+							</div>
+
+							<div class="container text-center mb-3">
+
+								<button class="btn btn-warning">send otp</button>
+
+							</div>
+
+						</form>
+
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</section>
+
+</body>
+</html>
