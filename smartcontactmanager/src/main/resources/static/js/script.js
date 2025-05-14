@@ -119,7 +119,7 @@ const paymentStart = () => {
 					description: 'Donation',            // Payment description
 					image: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D',      // Business logo or image   
 					order_id: response.id,             // Order ID from server response
-					handler: function (response) {       // Payment successful handler
+					handler: function(response) {       // Payment successful handler
 						console.log(response.razorpay_payment_id);
 						console.log(response.razorpay_order_id);
 						console.log(response.razorpay_signature);
@@ -128,10 +128,16 @@ const paymentStart = () => {
 						// alert("congrates !! Payment successful !")
 
 						updatePaymentOnServer(
-							response.razorpay_payment_id, 
-							response.razorpay_order_id, 
+							response.razorpay_payment_id,
+							response.razorpay_order_id,
 							'paid'
 						);
+
+						Swal.fire({
+							title: "congrates !! Payment successful !",
+							icon: "success",
+							draggable: true
+						});
 
 					},
 					"prefill": {            // Prefill user details
@@ -150,7 +156,7 @@ const paymentStart = () => {
 
 				let rzp = new Razorpay(option);
 
-				rzp.on('payment.failed', function (response) {
+				rzp.on('payment.failed', function(response) {
 					console.log(response.error.code);
 					console.log(response.error.description);
 					console.log(response.error.source);
@@ -165,6 +171,13 @@ const paymentStart = () => {
 						icon: "error",
 						draggable: true
 					});
+
+					updatePaymentOnServer(
+						response.error.metadata.payment_id,
+						response.error.metadata.order_id,
+						'failed'
+					);
+
 
 
 				});
@@ -184,8 +197,7 @@ const paymentStart = () => {
 
 // 
 
-const updatePaymentOnServer = (payment_id, order_id, status) =>
-{
+const updatePaymentOnServer = (payment_id, order_id, status) => {
 
 	fetch("/user/update-order", {
 		method: "POST",
@@ -203,11 +215,7 @@ const updatePaymentOnServer = (payment_id, order_id, status) =>
 			// success callback
 			console.log("Success:", response);
 
-			Swal.fire({
-				title: "congrates !! Payment successful !",
-				icon: "success",
-				draggable: true
-			});
+
 
 		})
 		.catch(error => {
